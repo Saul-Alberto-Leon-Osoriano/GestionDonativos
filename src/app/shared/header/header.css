@@ -1,0 +1,59 @@
+h2, p, a {
+
+    color: var(--blanco);
+
+}
+
+header {
+
+    width: 100%;
+
+}
+
+.header__fondo {
+
+    background-color: var(--azul);
+
+}
+
+.header__logo {
+
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+
+.header__contenedor {
+
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    justify-content: space-evenly;
+
+
+}
+
+.header__informacion {
+
+
+
+}
+
+
+.header__informacion--titulos {
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+
+}
+
+.header__informacion--etiqueta {
+
+    background-color: var(--dorado);
+    color: var(--amarillo);
+    border-radius: 10px;
+
+}
+
+

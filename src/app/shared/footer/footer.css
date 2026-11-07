@@ -1,0 +1,41 @@
+h2, p, a, img {
+
+    color: var(--blanco)
+
+}
+
+.footer__contenedor {
+
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+}
+
+.footer__redireccion {
+
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+
+
+.footer_background {
+
+    background-color: var(--azul);
+
+}
+
+.footer__etiqueta--descipcion {
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.footer__etiqueta {
+
+
+
+
+}
