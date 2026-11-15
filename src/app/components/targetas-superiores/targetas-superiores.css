@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,h2,h3,h4,p{
+    font-weight: normal;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+i{
+    margin-right: 5px;
+}
+
+.etiquetas_superior{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.general_tarjetas_kpis{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 40px 10px;
+}
+
+.tarjetas_kpis{
+    border-radius:10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.258);
+    padding: 15px 10px;
+    background-color: white;
+    width: 13%;
+}
+
+.tarjetas_kpis_titulo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 10px;
+    padding-bottom: 20px;
+}
+
+.tarjetas_kpis_texto_principal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.tarjetas_kpis_texto_secundario{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0px;
+    justify-content: space-evenly;
+    font-size: small;
+}
+
+.texto_grande{
+    font-size: xx-large;
+    font-weight: bold;
+    color: rgb(15, 41, 82);
+    margin-right: 10px;
+}
+.texto_mediano{
+    font-size: smaller;
+}
+
+.centrar_botones{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.boton_1{
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.299);
+    padding: 8px 20px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.boton_2{
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.299);
+    padding: 8px 20px;
+    margin: 10px 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(15, 41, 82);
+}
+
+.figura_1{
+    background-color: rgb(239, 246, 255);
+    color: rgb(15, 41, 82);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.figura_2{
+    background-color: rgb(255, 251, 235);
+    color: rgb(217, 119, 6);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.c-naranja{
+    color: rgb(217, 119, 6); 
+}
+
+.figura_3{
+    background-color: rgb(240, 253, 244);
+    color: rgb(21, 128, 61); 
+    padding: 10px;
+    border-radius: 8px;
+}
+.c-verde{
+    color: rgb(21, 128, 61); 
+}
+
+.figura_4{
+    background-color: rgb(254, 242, 242);
+    color: rgb(220, 38, 38);
+    padding: 10px;
+    border-radius: 8px;
+}
+.color-rojo{
+    color: rgb(220, 38, 38);
+}
+
+.color-gris{
+   color: rgb(107, 114, 128);
+}
+

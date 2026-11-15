@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Header } from '../../shared/header/header';
-import { Footer } from '../../shared/footer/footer';
-import { Login } from './login/login';
+import { Header } from '../../components/header/header';
+import { Footer } from '../../components/footer/footer';
+import { TargetasSuperiores } from '../../components/targetas-superiores/targetas-superiores';
 
 @Component({
-  imports: [Header, Footer, Login],
+  imports: [Header, Footer, TargetasSuperiores],
   selector: 'app-panel-control-principal',
   styleUrl: './panel-control-principal.css',
   templateUrl: './panel-control-principal.html',
