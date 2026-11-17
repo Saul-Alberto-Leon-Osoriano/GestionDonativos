@@ -1,0 +1,124 @@
+.linea_tiempo__contenedor {
+
+    width: 95%;
+    margin: 0 auto;
+
+}
+
+.linea_tiempo {}
+
+.linea_tiempo__etiqueta {
+
+    background-color: #dcfce7;
+    color: var(--verde);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.linea_tiempo__titulo {
+
+    color: var(--azul);
+    font-weight: bold;
+    font-size: 35px;
+    margin-bottom: 0;
+
+}
+
+.linea_tiempo__descripcion {
+
+    margin-top: 10px;
+    color: var(--gris);
+
+}
+
+.donativos {
+
+    align-items: center;
+    background-color: antiquewhite;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+}
+
+.donativos__informacion_envio {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.donativos__fecha {
+
+    background-color: var(--celeste);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--azul);
+    font-weight: bold;
+
+}
+
+.donativos__lote {
+
+    color: var(--gris);
+    font-weight: bold;
+    margin-right: 30px;
+
+}
+
+.donativos__informacion_general {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.donativos__titulo {
+
+    font-size: 25px;
+    color: var(--azul);
+    font-weight: bold;
+    margin: 0;
+}
+
+.donativos__descripcion {}
+
+
+.donativos__informacion_recepcion {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--gris);
+    align-items: center;
+
+
+}
+
+.donativos__logo {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.donativos__recepcion {
+
+    display: flex;
+    flex-direction: row;
+
+}
+
+.donativos__receptor {}
+
+.donativos__receptor--nombre {
+
+    font-weight: bold;
+
+}
+
+.donativos__acta {
+
+    color: var(--verde);
+    font-weight: bold;
+}
