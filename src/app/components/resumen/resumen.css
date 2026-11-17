@@ -1,0 +1,91 @@
+.tarjetas__bg {
+
+    background-color: var(--azul);
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 30px;
+
+}
+
+.tarjetas__contenedor {
+
+    padding: 20px 30px;
+    margin: 20px;
+    color: var(--blanco);
+    width: 60%;
+    
+}
+
+.tarjetas__texto {
+
+    display: grid;
+    grid-template-rows: auto auto auto;
+    font-size: 15px;
+
+}
+
+.tarjetas__etiqueta {
+    
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    border-radius: 100px;
+    flex-direction: row;
+    background-color: var(--dorado);
+    padding-left: 20px;
+    font-size: 10px;
+    
+}
+
+.tarjetas__titulo {
+    
+    font-size: 60px;
+    font-weight:bolder;
+    margin: 10px 0;
+    
+}
+
+
+.tarjetas__descripcion {
+
+    margin: 0;
+    line-height: 30px;
+    font-size: 15px;
+
+}
+
+.tarjetas__contenedor__datos {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tarjetas__datos {
+    
+    display: grid;
+    grid-template-rows: auto auto;
+
+}
+
+.tarjetas__datos__numeros {
+
+    color: var(--dorado);
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 0;
+}
+
+.tarjetas__datos__numeros--trazabilidad {
+
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 0;
+    color: var(--verde);
+
+}
+
+.tarjetas__datos__descripcion {
+
+    font-size: 15px;
+
+}
