@@ -1,0 +1,201 @@
+.metas__contenedor {
+
+    background-color: var(--blanco);
+    width: 95%;
+    margin: 0 auto 20px auto;
+    padding: 20px 40px;
+    border-radius: 30px;
+    border: 1px solid #e2e8f0;
+
+}
+
+.metas__titulo {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.metas__texto h2 {
+
+    color: var(--azul);
+    font-size: 30px;
+
+}
+
+.metas__texto p {
+
+    color: var(--gris);
+
+}
+
+.metas__cantidad {
+
+    height: 40px;
+    padding: 10px 20px;
+    background-color: #eff6ff;
+    border-radius: 10px;
+    color: var(--azul);
+    font-weight:600;
+
+}
+
+.barras__contenedor {
+
+    display: grid;
+    grid-template-rows: auto auto auto;
+
+
+}
+
+.barra {
+
+
+}
+
+.barras__descripcion {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    
+}
+
+.barras__informacion {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.barras__imagen {
+
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+
+/* Los colores se basan en: 
+
+- color normal para el fondo del ícono
+- coloroscuro para el fonde de la barra
+- coloroscuro--letra para el color de la letra en el porcentaje
+
+*/
+
+.naranja {
+    
+    background-color: #fef3c7;
+
+}
+
+.naranjaoscuro {
+
+    background-color: #f0b713;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    border-radius: 30px;
+
+}
+
+.naranjaoscuro--letra {
+
+    color: #f0b713;
+    font-weight: bold;
+
+}
+
+.verde {
+
+    background-color: #dcfce7;
+
+}
+
+.verdeoscuro {
+
+    background-color: #13ad63;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    border-radius: 30px;
+
+}
+
+.verdeoscuro--letra {
+
+    color: #13ad63;
+    font-weight: bold;
+}
+
+.azul {
+
+    background-color: #dbeafe;
+}
+
+.azuloscuro {
+
+    background-color: #2857c8;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    border-radius: 30px;
+
+}
+
+.azuloscuro--letra {
+
+    color: #2857c8;
+    font-weight: bold;
+}
+
+.morado {
+
+    background-color: #f3e8ff;
+
+}
+
+.moradooscuro {
+
+    background-color: #6d4beb;
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+    border-radius: 30px;
+}
+
+.moradooscuro--letra {
+
+    color: #6d4beb;
+    font-weight: bold;
+
+}
+
+.barras__titulo {
+
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.barras__avance {
+    
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.barras__avance--total {
+
+color: var(--gris);
+font-size: 14px;
+font-weight: lighter;
+margin-left: 5px;
+    
+}
+
+.barra__contenido {
+
+    height: 10px;
+    background-color: #f1f5f9;
+    border-radius: 30px;
+    margin-bottom: 20px;
+}
