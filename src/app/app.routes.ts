@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { PanelControlPrincipal } from './pages/panel-control-principal/panel-control-principal';
+import { PanelGestorUsuarios } from './pages/panel-gestor-usuarios/panel-gestor-usuarios';
 
 export const routes: Routes = [
     {
         path: '',
-        component: PanelControlPrincipal
+        component: PanelGestorUsuarios
     }
 
 ];
