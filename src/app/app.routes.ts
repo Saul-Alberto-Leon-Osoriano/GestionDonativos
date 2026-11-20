@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
-import { PanelGestorUsuarios } from './pages/panel-gestor-usuarios/panel-gestor-usuarios';
+import { PanelControlPrincipal } from './pages/panel-control-principal/panel-control-principal';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
+import { Transparencia } from './pages/transparencia/transparencia';
 
 export const routes: Routes = [
     {
         path: '',
-        component: PanelGestorUsuarios
+        component: Transparencia
     }
 
 ];
