@@ -20,26 +20,68 @@ a, p{
     justify-content: space-between;
 }
 
+.encabezado_superior p{
+    font-size:large;
+}
+
+.encabezado_superior h1{
+    font-weight: bold;
+    color: rgb(15, 41, 82);
+}
+
+.encabezado_superior_sub_1{
+    color: rgb(202, 138, 4);
+}
+
+.encabezado_superior_sub_2{
+    color: rgb(107, 114, 128);
+}
+
 .encabezado__boton_general {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.encabezado__boton {
+.encabezado__boton_1{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid rgb(209, 213, 219);
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.103);
+    padding: 8px 10px;
+    margin: 5px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.encabezado__boton_1 i{
+    color: rgb(5, 150, 105);
+    margin-right: 10px;
+}
+
+.encabezado__boton_2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 8px 10px;
     margin: 5px 10px;
     border-radius: 10px ;
+    background-color: rgb(234, 179, 8);
+    color: rgb(10, 29, 59);
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.103);
+}
+
+.encabezado__boton_2 i{
+    margin-right: 10px;
 }
 
 .targetas{
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 .targeta{
@@ -48,7 +90,193 @@ a, p{
     margin: 0px 30px;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid black;
     border-radius: 15px;
     padding: 20px 40px;
+    width: 50%;
+    background-color: white;
+    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.367);
 }
+
+.targeta_i{
+    font-size: 25px;
+    padding: 10px 10px;
+    border-radius: 15px;
+}
+
+.targeta_i_1{
+    background-color: rgb(239, 246, 255);
+    color: rgb(15, 41, 82);
+}
+
+
+.targeta_i_2{
+    background-color: rgb(238, 242, 255);
+    color: rgb(67, 56, 202);
+}
+
+
+.targeta_i_3{
+    background-color: rgb(255, 251, 235);
+    color: rgb(217, 119, 6);
+}
+
+
+.targeta_i_4{
+    background-color: rgb(236, 253, 245);
+    color: rgb(4, 120, 87);
+}
+
+.text_tamaño_mediogrande{
+    font-size: xx-large;
+    font-weight: bold
+}
+
+.color_verde{
+    color: rgb(24, 170, 41);
+}
+
+.i-separador{
+    margin-right: 10px;
+    color: rgb(217, 119, 6);
+}
+
+.separador{
+    margin-top: 20px;
+}
+
+.centrar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.centrar_2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.color__gris{
+    color: rgb(156, 163, 175);
+    margin-bottom: 15px;
+}
+
+.tabla__general{
+    margin-top: 30px;
+    width: 80%;
+    border: 1px solid rgb(229, 231, 235);
+    border-radius: 15px;
+    padding: 20px 0px;
+    margin-bottom: 30px;
+}
+
+.tabla__interior{
+    margin-top: 20px;
+}
+
+
+.buscador{
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 10px;
+    margin: 10px 20px;
+}
+
+.buscador input{
+    border: none;
+    width: 100%;
+    outline: none;
+    padding-left: 10px;
+}
+
+tbody{
+    background-color: white;
+}
+
+.id_estilo{
+    background-color: rgb(239, 246, 255);
+    border: 1px solid rgb(191, 219, 254);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: rgb(15, 41, 82);
+    font-weight: bold;
+}
+
+.nombre_estilo{
+    color: rgb(17, 24, 39);
+    font-weight: bold;
+}
+
+.numero_correo_estilo{
+    color: rgb(75, 85, 99);
+}
+
+.tip_u_estilo_d{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(255, 251, 235);
+    border: 2px solid rgb(254, 240, 186);
+    border-radius: 15px;
+    color: rgb(173, 111, 69);
+    font-weight: bold;
+    padding: 10px 0px;
+}
+
+.tip_u_estilo_a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(219, 234, 254);
+    border: 2px solid rgb(191, 219, 254);
+    border-radius: 15px;
+    color: rgb(17, 24, 39);
+    font-weight: bold;
+    padding: 10px 0px;
+}
+
+.tip_u_estilo_d i, .tip_u_estilo_a i{
+    margin-right: 15px;
+}
+
+
+.boton_general{
+    display: flex;
+    flex-direction: row;
+}
+
+.boton_general button{
+    margin-right: 10px;
+}
+
+.boton_1, .boton_2{
+    display: flex;
+    flex-direction: row;
+}
+
+.boton_1 i, .boton_2 i{
+    margin-right: 10px;
+}
+
+
+.boton_1 p{
+    color: rgb(13, 110, 253);
+}
+
+.boton_2 p{
+    color: rgb(220, 53, 69);
+}
+
+.boton_1 p:hover, .boton_2 p:hover{
+    color: rgb(255, 255, 255);
+}
+
+

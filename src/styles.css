@@ -8,12 +8,14 @@
     --gris: #575e69;
     --celeste: #dbeafe;
     --grisclaro: #f1f5f9;
+    --fondodefault: #f9fafb;
 
 }
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: var(--fondodefault);
 }
 
 * {
