@@ -10,13 +10,15 @@ h3, p, a, img {
 
 footer {
     background-color: var(--azul);
+    padding: 20px;
+
 }
 
 .footer__contenedor {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5px 35px;
+    padding: 20px 35px;
     align-items: center;
 }
 
@@ -26,16 +28,30 @@ footer {
     align-items: center;
 }
 
-.footer__titulo__principal {
-    display: flex;
-    flex-direction: column;
-    padding: 5px 15px;
+.footer__titulo img {
+
+    height: 60px;
+    width: auto;
+
 }
 
-.footer__titulo__principal__texto {}
+.footer__texto {
 
-.footer__titulo__secundario__texto {
+    margin-left: 30px;
+
+}
+
+.footer__texto_arriba {
+
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.footer__texto_abajo {
+
     display: flex;
     flex-direction: row;
-    align-items: center;
+    gap: 20px;
+
 }

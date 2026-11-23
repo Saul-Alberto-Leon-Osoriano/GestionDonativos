@@ -1,0 +1,44 @@
+.texto-azul-oscuro {
+  color: #0f294a;
+}
+
+/* Cuadrito amarillo con el código de barras */
+.icono-codigo-barras {
+  width: 44px;
+  height: 44px;
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+/* Recuadro celeste del Código de Lote */
+.caja-lote {
+  background-color: #f0f7ff;
+  border: 1px solid #bfdbfe;
+}
+
+/* Píldora verde "Nuevo" */
+.badge-nuevo {
+  background-color: #dcfce7;
+  color: #15803d;
+  font-size: 0.78rem;
+}
+
+/* Input de Destino Solidario */
+.input-trazabilidad {
+  border-color: #cbd5e1;
+  color: #1e293b;
+  font-size: 0.92rem;
+}
+
+.input-trazabilidad:focus {
+  border-color: #93c5fd;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Recuadro gris suave de Fecha y Hora */
+.caja-fecha-hora {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 0.92rem;
+  min-height: 42px;
+}

@@ -1,0 +1,143 @@
+<!-- Tarjeta principal Paso 2 -->
+<div class="card border border-light-subtle rounded-4 shadow-sm p-4 p-md-5 bg-white">
+
+  <!-- Encabezado de la tarjeta -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-4 mb-4 border-bottom">
+    <div class="d-flex align-items-center gap-3">
+      <!-- Número 2 en cuadrito -->
+      <div class="paso-numero rounded-3 d-flex align-items-center justify-content-center fw-bold">
+        2
+      </div>
+      <div>
+        <h4 class="mb-1 fw-bold texto-azul-oscuro">Detalle y Clasificación de Víveres</h4>
+        <p class="mb-0 text-secondary small">Agrega uno o más productos a este ingreso con sus fechas de vencimiento</p>
+      </div>
+    </div>
+
+    <!-- Botón "+ Agregar Otro Artículo" -->
+    <button type="button"
+      class="btn btn-agregar-articulo rounded-3 px-3 py-2 fw-semibold d-flex align-items-center gap-2">
+      <i class="bi bi-plus-lg"></i>
+      <span>Agregar Otro Artículo</span>
+    </button>
+  </div>
+
+  <!-- ================= ARTÍCULO #1 (Estado Óptimo) ================= -->
+  <div class="card-articulo rounded-4 p-3 p-md-4 mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center gap-2 fw-bold texto-azul-oscuro">
+        <i class="bi bi-box-seam-fill text-warning"></i>
+        <span>Artículo #1</span>
+      </div>
+      <span class="badge badge-estado-optimo rounded-2 px-3 py-2 fw-semibold d-flex align-items-center gap-1">
+        <i class="bi bi-check-lg"></i> Estado Óptimo
+      </span>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Categoría del Alimento</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2" value="Lácteos y Harinas">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Descripción del Producto</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2"
+          value="Leche Evaporada Entera (Lata 400g)">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Cantidad / Medida</label>
+        <div class="input-group grupo-medida">
+          <input type="number" class="form-control py-2 px-3 text-center" value="24">
+          <span class="input-group-text small fw-semibold px-3">Unid.</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">F. Vencimiento</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2" value="10/15/2025">
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ARTÍCULO #2 (Con botón Quitar) ================= -->
+  <div class="card-articulo rounded-4 p-3 p-md-4 mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div class="d-flex align-items-center gap-2 fw-bold texto-azul-oscuro">
+        <i class="bi bi-box-seam-fill text-warning"></i>
+        <span>Artículo #2</span>
+      </div>
+      <button type="button"
+        class="btn btn-link text-danger text-decoration-none p-0 small fw-semibold d-flex align-items-center gap-1">
+        <i class="bi bi-trash3"></i> Quitar
+      </button>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Categoría del Alimento</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2" value="Menestras y Granos">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Descripción del Producto</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2"
+          value="Lenteja Serrana Seleccionada (Bolsa 1Kg)">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Cantidad / Medida</label>
+        <div class="input-group grupo-medida">
+          <input type="number" class="form-control py-2 px-3 text-center" value="15">
+          <span class="input-group-text small fw-semibold px-3">Kg</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">F. Vencimiento</label>
+        <input type="text" class="form-control input-articulo rounded-3 py-2" value="03/20/2026">
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ARTÍCULO #3 (Alerta Preventiva) ================= -->
+  <div class="card-articulo alerta-preventiva rounded-4 p-3 p-md-4 mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <div class="d-flex align-items-center gap-2 fw-bold texto-alerta">
+        <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+        <span>Artículo #3 (Alerta Preventiva)</span>
+      </div>
+      <span class="badge badge-alerta rounded-2 px-3 py-2 fw-semibold">
+        Vence en menos de 30 días
+      </span>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Categoría del Alimento</label>
+        <input type="text" class="form-control input-alerta rounded-3 py-2" value="Galletas y Cereales">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Descripción del Producto</label>
+        <input type="text" class="form-control input-alerta rounded-3 py-2"
+          value="Galletas Fortificadas de Quinua (Paq.)">
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">Cantidad / Medida</label>
+        <div class="input-group grupo-medida-alerta">
+          <input type="number" class="form-control py-2 px-3 text-center" value="10">
+          <span class="input-group-text small fw-semibold px-3">Paq.</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label small fw-semibold text-secondary">F. Vencimiento</label>
+        <input type="text" class="form-control input-alerta texto-alerta fw-semibold rounded-3 py-2" value="03/25/2025">
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= OBSERVACIONES ================= -->
+  <div>
+    <label class="form-label fw-semibold small texto-azul-oscuro mb-2">
+      Observaciones de Recepción / Estado del Empaque
+    </label>
+    <textarea class="form-control input-articulo rounded-3 p-3" rows="2"
+      placeholder="Empaques sellados y en excelente estado de conservación higiénica..."></textarea>
+  </div>
+
+</div>

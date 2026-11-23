@@ -1,0 +1,60 @@
+/* ================= TARJETA RESUMEN DEL INGRESO ================= */
+.card-resumen {
+  background-color: #0b244e;
+}
+
+.texto-dorado {
+  color: #facc15;
+}
+
+.texto-celeste-suave {
+  color: #cbd5e1;
+}
+
+.linea-divisoria-azul {
+  border-bottom: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+/* Botón Dorado */
+.btn-confirmar-dorado {
+  background-color: #eab308;
+  color: #0f172a;
+  border: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-confirmar-dorado:hover {
+  background-color: #facc15;
+  color: #0f172a;
+}
+
+/* Botón Secundario Azul Translúcido */
+.btn-imprimir-azul {
+  background-color: #163a75;
+  border: 1px solid #3b82f6;
+  transition: background-color 0.2s ease;
+}
+
+.btn-imprimir-azul:hover {
+  background-color: #1d4ed8;
+  border-color: #60a5fa;
+}
+
+/* ================= RECUADRO PROTOCOLO DE INOCUIDAD ================= */
+.card-inocuidad {
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.texto-verde-check {
+  color: #10b981;
+}
+
+.texto-verde-oscuro {
+  color: #064e3b;
+}
+
+.texto-verde-texto {
+  color: #065f46;
+  line-height: 1.45;
+}

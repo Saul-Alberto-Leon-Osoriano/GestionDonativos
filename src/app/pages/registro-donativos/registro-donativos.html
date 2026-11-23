@@ -1,0 +1,28 @@
+<app-header></app-header>
+
+<main class="container-xl my-4">
+  
+  <!-- 1. Título superior (ancho completo) -->
+  <div class="mb-4">
+    <app-titulo-donacion></app-titulo-donacion>
+  </div>
+
+  <!-- 2. Grilla principal de 2 columnas -->
+  <div class="row g-4 align-items-start">
+    
+    <!-- COLUMNA IZQUIERDA (8 columnas): Pasos 1 y 2 -->
+    <div class="col-12 col-lg-8 d-flex flex-column gap-4">
+      <app-datos-donante></app-datos-donante>
+      <app-detalles-donacion></app-detalles-donacion>
+    </div>
+
+    <!-- COLUMNA DERECHA (4 columnas): Trazabilidad y Resumen -->
+    <div class="col-12 col-lg-4 d-flex flex-column gap-4">
+      <app-trazabilidad-donacion></app-trazabilidad-donacion>
+      <app-resumen-donacion></app-resumen-donacion>
+    </div>
+
+  </div>
+</main>
+
+<app-footer></app-footer>

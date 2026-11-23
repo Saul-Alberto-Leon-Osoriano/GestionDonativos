@@ -7,7 +7,7 @@ import { LineaTiempo } from '../../components/linea-tiempo/linea-tiempo';
 import { ContactarPastoral } from '../../components/contactar-pastoral/contactar-pastoral';
 
 @Component({
-  imports: [Header, Footer, Resumen, MetasDonacion, LineaTiempo, ContactarPastoral],
+  imports: [Header, Footer, Resumen, MetasDonacion, LineaTiempo, ContactarPastoral, ],
   selector: 'app-transparencia',
   styleUrl: './transparencia.css',
   templateUrl: './transparencia.html',
