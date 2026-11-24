@@ -12,6 +12,10 @@
 
 .linea_tiempo__etiqueta {
 
+    display: inline-flex;
+    width: fit-content;
+    white-space: nowrap;
+
     background-color: #dcfce7;
     color: var(--verde);
     font-weight: bold;
@@ -40,7 +44,7 @@
 .donativos {
 
     align-items: center;
-    padding: 10px 30px;
+    padding: 20px 30px;
     margin-bottom: 30px;
     border-radius: 20px;
     position: relative;
@@ -174,7 +178,8 @@
     color: var(--gris);
     align-items: center;
     font-size: 15px;
-    
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     
 }
 
@@ -188,6 +193,7 @@
 
 .donativos__logo i,
 .donativos__recepcion i {
+
     color: var(--dorado);
     margin-right: 10px;
 }
@@ -200,7 +206,9 @@
 
 }
 
-.donativos__receptor {
+.donativos__receptor, .donativos__acta {
+
+    margin-bottom: 0;
 
 }
 

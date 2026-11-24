@@ -1,0 +1,121 @@
+<!-- Tarjeta principal con bordes redondeados y sombra suave -->
+<div class="card border border-light-subtle rounded-4 shadow-sm p-4 p-md-5 bg-white">
+
+  <!-- Encabezado de la tarjeta -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-4 mb-4 border-bottom">
+    <div class="d-flex align-items-center gap-3">
+      <!-- Número 1 en cuadrito -->
+      <div class="paso-numero rounded-3 d-flex align-items-center justify-content-center fw-bold">
+        1
+      </div>
+      <div>
+        <h4 class="mb-1 fw-bold texto-azul-oscuro">Datos del Donante y Origen</h4>
+        <p class="mb-0 text-secondary small">Identificación de la procedencia para fines de auditoría y agradecimiento
+        </p>
+      </div>
+    </div>
+
+    <!-- Píldora derecha "Paso Obligatorio" -->
+    <span class="badge rounded-pill badge-obligatorio px-3 py-2 fw-semibold">
+      Paso Obligatorio
+    </span>
+  </div>
+
+  <!-- Selector de TIPO DE DONANTE (Radio buttons estilizados como botones) -->
+  <div class="mb-4">
+    <label class="form-label fw-bold small text-uppercase texto-azul-oscuro mb-2" style="letter-spacing: 0.5px;">
+      Tipo de Donante
+    </label>
+
+    <div class="row g-3">
+      <!-- Opción 1: Familia / Alumno (Seleccionada por defecto) -->
+      <div class="col-12 col-md-4">
+        <input type="radio" class="btn-check" name="tipoDonante" id="donanteFamilia" autocomplete="off" checked>
+        <label
+          class="btn btn-opcion-donante w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+          for="donanteFamilia">
+          <i class="bi bi-mortarboard-fill text-warning fs-5"></i>
+          <span>Familia / Alumno</span>
+        </label>
+      </div>
+
+      <!-- Opción 2: Empresa / Aliado -->
+      <div class="col-12 col-md-4">
+        <input type="radio" class="btn-check" name="tipoDonante" id="donanteEmpresa" autocomplete="off">
+        <label
+          class="btn btn-opcion-donante w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+          for="donanteEmpresa">
+          <i class="bi bi-building-fill text-secondary fs-5"></i>
+          <span>Empresa / Aliado</span>
+        </label>
+      </div>
+
+      <!-- Opción 3: Anónimo -->
+      <div class="col-12 col-md-4">
+        <input type="radio" class="btn-check" name="tipoDonante" id="donanteAnonimo" autocomplete="off">
+        <label
+          class="btn btn-opcion-donante w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+          for="donanteAnonimo">
+          <i class="bi bi-incognito text-secondary fs-5"></i>
+          <span>Anónimo</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campos del formulario (Grid de 2 columnas en Bootstrap) -->
+  <div class="row g-4">
+    <!-- Campo 1: Nombre Completo / Razón Social -->
+    <div class="col-12 col-md-6">
+      <label class="form-label fw-semibold small texto-azul-oscuro">
+        Nombre Completo / Razón Social <span class="text-danger">*</span>
+      </label>
+      <div class="input-group input-redondeado">
+        <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+          <i class="bi bi-person-fill"></i>
+        </span>
+        <input type="text" class="form-control border-start-0 py-2" placeholder="Ej. Familia Huamán Quispe"
+          value="Familia Huamán Quispe">
+      </div>
+    </div>
+
+    <!-- Campo 2: DNI / RUC de Contacto -->
+    <div class="col-12 col-md-6">
+      <label class="form-label fw-semibold small texto-azul-oscuro">
+        DNI / RUC de Contacto
+      </label>
+      <div class="input-group input-redondeado">
+        <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+          <i class="bi bi-person-vcard-fill"></i>
+        </span>
+        <input type="text" class="form-control border-start-0 py-2" placeholder="Ej. 45892104" value="45892104">
+      </div>
+    </div>
+
+    <!-- Campo 3: Grado / Sección -->
+    <div class="col-12 col-md-6">
+      <label class="form-label fw-semibold small texto-azul-oscuro">
+        Grado / Sección (Si aplica)
+      </label>
+      <div class="input-group">
+        <input type="text" class="form-control rounded-3 py-2 px-3" placeholder="Ej. 3ro de Secundaria - Sección 'A'"
+          value='3ro de Secundaria - Sección "A"'>
+      </div>
+    </div>
+
+    <!-- Campo 4: Teléfono / WhatsApp -->
+    <div class="col-12 col-md-6">
+      <label class="form-label fw-semibold small texto-azul-oscuro">
+        Teléfono / WhatsApp
+      </label>
+      <div class="input-group input-redondeado">
+        <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+          <i class="bi bi-telephone-fill"></i>
+        </span>
+        <input type="tel" class="form-control border-start-0 py-2" placeholder="+51 964 123 456"
+          value="+51 964 123 456">
+      </div>
+    </div>
+  </div>
+
+</div>

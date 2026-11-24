@@ -2,7 +2,7 @@
 
     width: 95%;
     margin: 0 auto 20px auto;
-    background-color: var(--dorado);
+    background: linear-gradient(90deg, #eab308 0%, #f59e0b 50%, #b47806 100%);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -29,7 +29,7 @@
 
 .contacto__logo  i {
 
-    color: var(--dorado);
+    color: var(--amarillo);
     font-size: 30px;
     height: 100%;
 }
@@ -57,7 +57,7 @@
 .contacto__btn a {
     
     text-decoration: none;
-    color: var(--dorado);
+    color: var(--amarillo);
     background-color: var(--azul);
     font-weight: bold;
     padding: 20px;
