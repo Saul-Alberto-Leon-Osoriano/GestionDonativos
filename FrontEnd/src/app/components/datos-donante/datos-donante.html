@@ -1,0 +1,118 @@
+<div class="card border border-light-subtle rounded-4 shadow-sm p-4 p-md-5 bg-white">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-4 mb-4 border-bottom">
+    <div class="d-flex align-items-center gap-3">
+      <div class="paso-numero rounded-3 d-flex align-items-center justify-content-center fw-bold">
+        1
+      </div>
+      <div>
+        <h4 class="mb-1 fw-bold texto-azul-oscuro">Datos del Donante y Origen</h4>
+        <p class="mb-0 text-secondary small">Identificación de la procedencia para fines de auditoría y agradecimiento
+        </p>
+      </div>
+    </div>
+
+    <span class="badge rounded-pill badge-obligatorio px-3 py-2 fw-semibold">
+      Paso Obligatorio
+    </span>
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label fw-bold small text-uppercase texto-azul-oscuro mb-2"
+      style="letter-spacing: 0.5px;">
+      Tipo de Donante
+    </label>
+
+    <div class="row g-3">
+      @for (tipo of tiposDonante; track tipo.valor; let i = $index) {
+        <div class="col-12 col-md-4">
+          <input type="radio" class="btn-check" [id]="'donante-' + tipo.valor"
+            [value]="tipo.valor" [formField]="draft.form.donante.tipo" />
+          <label class="btn btn-opcion-donante w-100 py-3 rounded-3 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+            [for]="'donante-' + tipo.valor">
+            <i class="bi fs-5" [class]="tipo.icono" [class.text-warning]="i === 0"
+              [class.text-secondary]="i > 0"></i>
+            <span>{{ tipo.etiqueta }}</span>
+          </label>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (!esAnonimo()) {
+    <div class="row g-4">
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold small texto-azul-oscuro" for="nombreDonante">
+          {{ draft.modelo().donante.tipo === 'empresa' ? 'Razón Social' : 'Nombre Completo' }}
+          <span class="text-danger">*</span>
+        </label>
+        <div class="input-group input-redondeado"
+          [class.campo-invalido]="draft.form.donante.nombre().touched() && draft.form.donante.nombre().invalid()">
+          <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+            <i class="bi bi-person-fill"></i>
+          </span>
+          <input id="nombreDonante" type="text"
+            class="form-control border-start-0 py-2"
+            placeholder="Ej. Familia Huamán Quispe"
+            [class.is-invalid]="draft.form.donante.nombre().touched() && draft.form.donante.nombre().invalid()"
+            [formField]="draft.form.donante.nombre" />
+        </div>
+        <app-form-error [campo]="draft.form.donante.nombre()" />
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold small texto-azul-oscuro" for="documentoDonante">
+          DNI / RUC de Contacto <span class="text-danger">*</span>
+        </label>
+        <div class="input-group input-redondeado"
+          [class.campo-invalido]="draft.form.donante.documento().touched() && draft.form.donante.documento().invalid()">
+          <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+            <i class="bi bi-person-vcard-fill"></i>
+          </span>
+          <input id="documentoDonante" type="text"
+            class="form-control border-start-0 py-2"
+            placeholder="Ej. 45892104"
+            [class.is-invalid]="draft.form.donante.documento().touched() && draft.form.donante.documento().invalid()"
+            [formField]="draft.form.donante.documento" />
+        </div>
+        <app-form-error [campo]="draft.form.donante.documento()" />
+      </div>
+
+      @if (draft.modelo().donante.tipo === 'familia') {
+        <div class="col-12 col-md-6">
+          <label class="form-label fw-semibold small texto-azul-oscuro" for="gradoDonante">
+            Grado / Sección (Si aplica)
+          </label>
+          <div class="input-group">
+            <input id="gradoDonante" type="text"
+              class="form-control rounded-3 py-2 px-3"
+              placeholder="Ej. 3ro de Secundaria - Sección 'A'"
+              [formField]="draft.form.donante.gradoSeccion" />
+          </div>
+        </div>
+      }
+
+      <div class="col-12 col-md-6">
+        <label class="form-label fw-semibold small texto-azul-oscuro" for="telefonoDonante">
+          Teléfono / WhatsApp <span class="text-danger">*</span>
+        </label>
+        <div class="input-group input-redondeado"
+          [class.campo-invalido]="draft.form.donante.telefono().touched() && draft.form.donante.telefono().invalid()">
+          <span class="input-group-text bg-white border-end-0 text-secondary ps-3">
+            <i class="bi bi-telephone-fill"></i>
+          </span>
+          <input id="telefonoDonante" type="tel"
+            class="form-control border-start-0 py-2"
+            placeholder="+51 964 123 456"
+            [class.is-invalid]="draft.form.donante.telefono().touched() && draft.form.donante.telefono().invalid()"
+            [formField]="draft.form.donante.telefono" />
+        </div>
+        <app-form-error [campo]="draft.form.donante.telefono()" />
+      </div>
+    </div>
+  } @else {
+    <div class="alert alert-info mb-0" role="status">
+      <i class="bi bi-incognito me-2"></i>
+      Registro anónimo: no se solicitarán datos personales del donante.
+    </div>
+  }
+</div>

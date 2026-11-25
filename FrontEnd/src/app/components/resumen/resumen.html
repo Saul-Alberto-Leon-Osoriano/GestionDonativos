@@ -1,0 +1,39 @@
+<div class="tarjetas__bg mx-auto">
+    <div class="tarjetas__contenedor text-white">
+        <div class="tarjetas__texto d-grid">
+            <div class="tarjetas__etiqueta d-inline-flex align-items-center text-nowrap rounded-pill">
+                <i class="bi bi-heart-fill"></i>
+                <p>Portal de transparencia Comunitaria</p>
+            </div>
+
+            <p class="tarjetas__titulo my-2">
+                Cada aporte alimenta la esperanza de una familia
+            </p>
+
+            <p class="tarjetas__descripcion">
+                Estimada comunidad de padres, alumnos y bienhechores del Colegio San Pío X:
+                aquí pueden verificar con absoluta claridad el destino, pesaje y entrega
+                de cada kilo de alimento donado durante nuestras jornadas pastorales.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="tarjetas__contenedor__datos d-grid">
+            <div class="tarjetas__datos d-grid">
+                <p class="tarjetas__datos__numeros mb-0">{{ estadisticas().totalKg | number: '1.0-2' }}</p>
+                <p class="tarjetas__datos__descripcion">Kilogramos donados</p>
+            </div>
+
+            <div class="tarjetas__datos d-grid">
+                <p class="tarjetas__datos__numeros mb-0">{{ estadisticas().totalLotes }}</p>
+                <p class="tarjetas__datos__descripcion">Lotes registrados</p>
+            </div>
+
+            <div class="tarjetas__datos d-grid">
+                <p class="tarjetas__datos__numeros--trazabilidad mb-0">{{ estadisticas().totalFamilias }}</p>
+                <p class="tarjetas__datos__descripcion">Familias beneficiadas</p>
+            </div>
+        </div>
+    </div>
+</div>

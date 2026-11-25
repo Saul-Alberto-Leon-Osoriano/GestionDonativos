@@ -1,0 +1,145 @@
+.contenedor{
+    background-color: white;
+    margin-left: 50px;
+    margin-top: 50px;
+    border: 2px solid rgb(229, 231, 235);
+    border-radius: 20px;
+}
+
+input, button{
+    border: none;
+    background-color: white;
+    outline: none;
+}
+
+.texto__superior{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 30px;
+}
+
+.buscador{
+    color: rgb(156, 163, 175);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid rgb(209, 213, 219);
+    margin: 10px 40px;
+    padding: 10px;
+    width: 30%;
+    border-radius: 10px;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+}
+
+.table__header{
+    height: 60px;
+    background-color: rgb(250, 251, 252);
+}
+
+.table__data{
+    text-align: left;
+    font-size: larger;
+    width: 15%;
+}
+
+.table__data__cate{
+    padding-left: 10px;
+}
+
+.centrar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.capsulas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(220, 252, 231);
+    border: 1px solid rgb(187, 247, 208);
+    color: rgb(21, 128, 61);
+    border-radius: 10px;
+    width: 70%;
+}
+
+.inferior{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: medium;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: rgb(250, 251, 252);
+    color: rgb(107, 114, 128);
+}
+
+.inferior-span{
+    color: rgb(107, 114, 128);
+    font-weight: bold;
+}
+
+.inferior-boton{
+    border: 1px solid rgb(107, 114, 128);
+    border-radius: 10px;
+    padding: 10px 13px;
+    margin: 5px;
+}
+
+.i-separador{
+    padding-right: 5px;
+}
+
+.texto__black{
+    font-weight: bold;
+}
+
+.texto__xlarge{
+    font-size: x-large;
+}
+
+.color-noche{
+    color: rgb(15, 41, 82);
+}
+
+.color-gris-claro{
+    color: rgb(107, 114, 128);
+}
+
+.color-gris-oscuro{
+    color: rgb(31, 41, 55);
+}
+
+.estado-preparacion{
+    background-color: rgb(254, 249, 195);
+    border-color: rgb(253, 230, 138);
+    color: rgb(146, 64, 14);
+}
+
+.estado-pendiente{
+    background-color: rgb(243, 244, 246);
+    border-color: rgb(209, 213, 219);
+    color: rgb(75, 85, 99);
+}
+
+.inferior-boton.activa{
+    background-color: rgb(15, 41, 82);
+    color: white;
+    border-color: rgb(15, 41, 82);
+}
+
+.inferior-boton:disabled{
+    opacity: 0.4;
+    cursor: not-allowed;
+}

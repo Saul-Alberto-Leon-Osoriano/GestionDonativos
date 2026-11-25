@@ -1,0 +1,97 @@
+<div>
+    <main>
+        <div class="etiquetas_superior">
+            <div>
+                <h3 class="texto_mediano c-naranja">ÁREA DE PASTORAL & ASISTENCIA SOCIAL</h3>
+                <h1 class="texto_grande">Panel de Control y Gestión de Lotes</h1>
+                <p class="texto_mediano color-gris">Supervisión en tiempo real de alimentos no perecibles, rotación de fechas de vencimiento y despacho
+                </p>
+            </div>
+            <div class="centrar_botones">
+                <button type="button" class="boton_1 centrar_botones border-0 bg-white" (click)="exportarReporte()">
+                    <i class="bi bi-file-earmark-arrow-down-fill color-gris"></i>
+                    <p>Exportar Reporte</p>
+                </button>
+                <a class="boton_2 centrar_botones" routerLink="/registrar_encomienda">
+                    <i class="bi bi-plus-lg c-naranja"></i>
+                    <p>Registrar Ingreso</p>
+                </a>
+            </div>
+        </div>
+        @if (error()) {
+            <div class="alert alert-danger py-2 px-3 small mt-3 mb-0" role="alert">
+                {{ error() }}
+            </div>
+        }
+        <div class="general_tarjetas_kpis">
+            <div class="tarjetas_kpis">
+                <div class="tarjetas_kpis_titulo">
+                    <p class="texto_mediano color-gris">TOTAL ACOPIADO</p>
+                    <div class="figura_1">
+                        <i class="bi bi-box2-fill"></i>
+                    </div>
+                </div>
+                <div class="tarjetas_kpis_texto_principal">
+                    <p class="texto_grande">{{ kpis().totalAcopiado | number: '1.0-2' }}</p>
+                    <p class="color-gris">Kg/Unidades</p>
+                </div>
+                <div class="tarjetas_kpis_texto_secundario c-verde">
+                    <i class="bi bi-graph-up-arrow"></i>
+                    <p>Inventario actualizado</p>
+                </div>
+            </div>
+            <div class="tarjetas_kpis">
+                <div class="tarjetas_kpis_titulo">
+                    <p class="texto_mediano color-gris">EN INVENTARIO ACTIVO</p>
+                    <div class="figura_2">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                </div>
+                <div class="tarjetas_kpis_texto_principal">
+                    <p class="texto_grande">{{ kpis().lotesActivos }}</p>
+                    <p class="color-gris">Lotes Clasificados</p>
+                </div>
+                <div class="tarjetas_kpis_texto_secundario c-naranja">
+                    <i class="bi bi-hourglass-split"></i>
+                    <p>{{ enPreparacion() }}</p>
+                    <p>en preparación de despacho</p>
+                </div>
+            </div>
+            <div class="tarjetas_kpis">
+                <div class="tarjetas_kpis_titulo">
+                    <p class="texto_mediano color-gris">LOTES ENTREGADOS</p>
+                    <div class="figura_3">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                </div>
+                <div class="tarjetas_kpis_texto_principal">
+                    <p class="texto_grande">{{ kpis().lotesEntregados }}</p>
+                    <p class="color-gris">Despachos con éxito</p>
+                </div>
+                <div class="tarjetas_kpis_texto_secundario c-verde">
+                    <i class="bi bi-building-check"></i>
+                    <p>Beneficiando a </p>
+                    <p>{{ instituciones() }}</p>
+                    <p> instituciones</p>
+                </div>
+            </div>
+            <div class="tarjetas_kpis color-rojo">
+                <div class="tarjetas_kpis_titulo">
+                    <p class="texto_mediano">ATENCIÓN PRIORITARIA</p>
+                    <div class="figura_4">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                    </div>
+                </div>
+                <div class="tarjetas_kpis_texto_principal">
+                    <p class="texto_grande color-rojo">{{ kpis().articulosCriticos }}</p>
+                    <p>Alimentos &lt; 15 días</p>
+                </div>
+                <div class="tarjetas_kpis_texto_secundario">
+                    <i class="bi bi-arrow-right-circle"></i>
+                    <p>Requieren salida inmediata</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
