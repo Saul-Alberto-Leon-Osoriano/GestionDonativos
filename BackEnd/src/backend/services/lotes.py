@@ -7,6 +7,7 @@ from fastapi import HTTPException
 from backend.repositories import RepositorioLotes
 from backend.schemas import (
     AlertaVencimiento,
+    DonativoDraft,
     EstadoLote,
     KpisInventario,
     Lote,
@@ -14,32 +15,13 @@ from backend.schemas import (
     RespuestaPaginada,
 )
 
-from .donativos import calcular_peso_neto, redondear
+from .donativos import (
+    calcular_peso_neto,
+    categoria_principal,
+    descripcion_lote,
+    redondear,
+)
 from .fechas import dias_hasta, normalizar_utc, utc_actual
-
-
-def generar_codigo_lote(lotes: list[Lote], fecha_ingreso: datetime) -> str:
-    anio = fecha_ingreso.year
-    prefijo = f"#PX-LOT-{anio}-"
-    secuencia = 0
-
-    for lote in lotes:
-        if not lote.codigo.startswith(prefijo):
-            continue
-        sufijo = lote.codigo[len(prefijo) :]
-        if sufijo.isdigit():
-            secuencia = max(secuencia, int(sufijo))
-
-    return f"{prefijo}{secuencia + 1:03d}"
-
-
-def generar_id_lote(lotes: list[Lote], secuencia: int) -> str:
-    ids_existentes = {lote.id for lote in lotes}
-    while True:
-        candidato = f"lote-{secuencia:03d}"
-        if candidato not in ids_existentes:
-            return candidato
-        secuencia += 1
 
 
 class ServicioLotes:
@@ -48,51 +30,13 @@ class ServicioLotes:
     def __init__(self, repositorio: RepositorioLotes) -> None:
         self._repositorio = repositorio
 
-    def _filtrar(
-        self,
-        termino: str | None,
-        estado: EstadoLote | None,
-        categoria: str | None,
-    ) -> list[Lote]:
-        lotes = self._repositorio.listar()
-
-        if termino and termino.strip():
-            texto = termino.strip().casefold()
-            lotes = [
-                lote
-                for lote in lotes
-                if texto
-                in " ".join(
-                    (
-                        lote.id,
-                        lote.codigo,
-                        lote.categoria_principal,
-                        lote.descripcion,
-                        lote.destino,
-                    )
-                ).casefold()
-            ]
-
-        if estado is not None:
-            lotes = [lote for lote in lotes if lote.estado == estado]
-
-        if categoria and categoria.strip():
-            categoria_texto = categoria.strip().casefold()
-            lotes = [
-                lote
-                for lote in lotes
-                if categoria_texto in lote.categoria_principal.casefold()
-            ]
-
-        return sorted(lotes, key=lambda lote: lote.fecha_ingreso, reverse=True)
-
     def listar(
         self,
         termino: str | None = None,
         estado: EstadoLote | None = None,
         categoria: str | None = None,
     ) -> list[Lote]:
-        return self._filtrar(termino, estado, categoria)
+        return self._repositorio.listar(termino, estado, categoria)
 
     def listar_paginado(
         self,
@@ -102,11 +46,12 @@ class ServicioLotes:
         pagina: int,
         tamano_pagina: int,
     ) -> RespuestaPaginada[Lote]:
-        lotes = self._filtrar(termino, estado, categoria)
-        inicio = (pagina - 1) * tamano_pagina
+        items, total = self._repositorio.listar_paginado(
+            termino, estado, categoria, pagina, tamano_pagina
+        )
         return RespuestaPaginada(
-            items=lotes[inicio : inicio + tamano_pagina],
-            total=len(lotes),
+            items=items,
+            total=total,
             pagina=pagina,
             tamano_pagina=tamano_pagina,
         )
@@ -117,41 +62,62 @@ class ServicioLotes:
             raise HTTPException(status_code=404, detail="Lote no encontrado.")
         return lote
 
-    def crear(self, datos: LoteCrear) -> Lote:
+    def _validar(self, datos: LoteCrear) -> None:
         if not datos.categoria_principal.strip():
             raise HTTPException(
-                status_code=400, detail="La categoria principal del lote es obligatoria."
+                status_code=400,
+                detail="La categoria principal del lote es obligatoria.",
             )
         if not datos.destino.strip():
-            raise HTTPException(status_code=400, detail="El destino del lote es obligatorio.")
+            raise HTTPException(
+                status_code=400,
+                detail="El destino del lote es obligatorio.",
+            )
+        for articulo in datos.articulos:
+            if articulo.fecha_vencimiento is None:
+                raise HTTPException(
+                    status_code=400,
+                    detail="La fecha de vencimiento es obligatoria para cada articulo.",
+                )
 
-        fecha_ingreso = (
-            normalizar_utc(datos.fecha_ingreso)
-            if datos.fecha_ingreso is not None
-            else utc_actual()
-        )
-        lotes_existentes = self._repositorio.listar()
-        codigo = generar_codigo_lote(lotes_existentes, fecha_ingreso)
-        secuencia = int(codigo.rsplit("-", 1)[1])
-        id_lote = generar_id_lote(lotes_existentes, secuencia)
+    def crear(self, datos: LoteCrear, id_agente_pastoral: int) -> Lote:
+        self._validar(datos)
+        if datos.fecha_ingreso is not None:
+            datos = datos.model_copy(
+                update={"fecha_ingreso": normalizar_utc(datos.fecha_ingreso)}
+            )
+        return self._repositorio.crear(datos, id_agente_pastoral)
 
-        lote = Lote(
-            id=id_lote,
-            codigo=codigo,
-            fecha_ingreso=fecha_ingreso,
-            categoria_principal=datos.categoria_principal.strip(),
-            descripcion=datos.descripcion,
-            volumen=calcular_peso_neto(datos.articulos),
-            unidad=datos.unidad,
-            destino=datos.destino.strip(),
-            estado=datos.estado,
-            familias_beneficiadas=datos.familias_beneficiadas,
-            articulos=datos.articulos,
+    def crear_desde_donativo(
+        self, draft: DonativoDraft, id_agente_pastoral: int
+    ) -> Lote:
+        if not draft.destino or not draft.destino.strip():
+            raise HTTPException(
+                status_code=400,
+                detail="El destino del donativo es obligatorio.",
+            )
+
+        resumen = calcular_peso_neto(draft.articulos)
+        descripcion = (
+            f"{descripcion_lote(draft)} | Peso neto: {resumen:.2f} kg"
         )
-        return self._repositorio.crear(lote)
+        datos = LoteCrear(
+            fecha_ingreso=normalizar_utc(utc_actual()),
+            categoria_principal=categoria_principal(draft.articulos),
+            descripcion=descripcion,
+            unidad="Kg",
+            destino=draft.destino.strip(),
+            estado=EstadoLote.PENDIENTE,
+            familias_beneficiadas=0,
+            articulos=draft.articulos,
+        )
+        self._validar(datos)
+        return self._repositorio.crear_desde_donativo(
+            draft, datos, id_agente_pastoral
+        )
 
     def cambiar_estado(self, id_lote: str, estado: EstadoLote) -> Lote:
-        lote = self._repositorio.actualizar(id_lote, {"estado": estado})
+        lote = self._repositorio.actualizar_estado(id_lote, estado)
         if lote is None:
             raise HTTPException(status_code=404, detail="Lote no encontrado.")
         return lote
@@ -199,7 +165,7 @@ class ServicioLotes:
         estado: EstadoLote | None,
         categoria: str | None,
     ) -> str:
-        lotes = self._filtrar(termino, estado, categoria)
+        lotes = self._repositorio.listar(termino, estado, categoria)
         buffer = io.StringIO(newline="")
         escribir = csv.writer(buffer)
         escribir.writerow(

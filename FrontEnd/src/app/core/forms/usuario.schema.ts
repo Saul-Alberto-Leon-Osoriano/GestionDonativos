@@ -20,6 +20,13 @@ export const usuarioSchema = schema<UsuarioForm>((path) => {
   email(path.correo, {
     message: 'Ingresa un correo electrónico válido.',
   });
+  minLength(
+    path.password,
+    ({ value }) => (value().trim() ? 8 : 0),
+    {
+      message: 'La contraseña debe tener al menos 8 caracteres.',
+    },
+  );
   required(path.rol, {
     message: 'Selecciona el tipo de usuario.',
   });

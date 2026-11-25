@@ -47,6 +47,7 @@ export class GestorUsuarios {
       nombre: usuario.nombre,
       telefono: usuario.telefono,
       correo: usuario.correo,
+      password: '',
       rol: usuario.rol,
       activo: usuario.activo,
     };
@@ -74,6 +75,13 @@ export class GestorUsuarios {
     await submit(this.formulario, async () => {
       const datos = this.modelo();
       const id = this.editandoId();
+
+      if (!id && !datos.password.trim()) {
+        this.error.set(
+          'Ingresa una contraseña temporal para el nuevo usuario.',
+        );
+        return;
+      }
 
       try {
         if (id) {

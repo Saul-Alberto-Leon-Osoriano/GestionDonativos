@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { adminGuard, authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/auth.guard';
 import { LoginPrincipal } from './pages/login-principal/login-principal';
 import { PanelControlPrincipal } from './pages/panel-control-principal/panel-control-principal';
 import { PanelGestorUsuarios } from './pages/panel-gestor-usuarios/panel-gestor-usuarios';
@@ -22,12 +22,12 @@ export const routes: Routes = [
   {
     path: 'registrar_encomienda',
     component: RegistroDonativos,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
   },
   {
     path: 'panel-control',
     component: PanelControlPrincipal,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
   },
   {
     path: 'gestor-usuarios',

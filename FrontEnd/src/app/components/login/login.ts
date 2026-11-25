@@ -45,14 +45,11 @@ export class Login {
     this.errorLogin.set(null);
 
     void submit(this.formulario, async () => {
-      const accesoCorrecto = await this.auth.login(
-        this.modelo(),
-        this.tipoAcceso(),
-      );
+      const accesoCorrecto = await this.auth.login(this.modelo());
 
       if (!accesoCorrecto) {
         this.errorLogin.set(
-          'Las credenciales no coinciden con el tipo de acceso seleccionado.',
+          this.auth.error() ?? 'Correo o contraseña incorrectos.',
         );
         return;
       }
@@ -79,8 +76,16 @@ export class Login {
     evento.preventDefault();
 
     void submit(this.recuperacionFormulario, async () => {
-      this.auth.solicitarRecuperacion(this.recuperacionModelo().correo);
-      this.recuperacionEnviada.set(true);
+      const enviada = await this.auth.solicitarRecuperacion(
+        this.recuperacionModelo().correo,
+      );
+      if (enviada) {
+        this.recuperacionEnviada.set(true);
+      } else {
+        this.errorLogin.set(
+          this.auth.error() ?? 'No se pudo registrar la solicitud.',
+        );
+      }
     });
   }
 }

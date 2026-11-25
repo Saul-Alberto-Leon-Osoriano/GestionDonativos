@@ -1,5 +1,8 @@
 import { RolUsuario } from './usuario.model';
 
+export const CLAVE_TOKEN = 'gestion-donativos:token';
+export const CLAVE_SESION = 'gestion-donativos:sesion';
+
 export interface Credenciales {
   correo: string;
   password: string;
@@ -11,6 +14,13 @@ export interface SesionUsuario {
   nombre: string;
   correo: string;
   rol: RolUsuario;
+}
+
+export interface RespuestaLogin {
+  accessToken: string;
+  tokenType: string;
+  expiraEn: number;
+  usuario: SesionUsuario;
 }
 
 export interface RecuperacionForm {
