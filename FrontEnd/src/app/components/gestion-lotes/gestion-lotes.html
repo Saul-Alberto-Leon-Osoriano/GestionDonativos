@@ -1,0 +1,146 @@
+<div class="contenedor">
+    <div class="texto__superior">
+        <div>
+            <p class="texto__black texto__xlarge color-noche">Gestión de Lotes y Despachos</p>
+            <p class="color-gris-claro">Registro histórico y en proceso de víveres clasificados</p>
+        </div>
+        <div class="buscador">
+            <input #buscadorInput type="search" placeholder="Buscar lote o producto..."
+                [value]="lotesService.busqueda()" (input)="buscar($event)" />
+            <button type="button" aria-label="Buscar" (click)="lotesService.buscar(buscadorInput.value)">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr class="table__header color-gris-claro">
+                <th>CÓDIGO/LOTE</th>
+                <th>CATEGORÍA PRINCIPAL</th>
+                <th>VOLUMEN</th>
+                <th>DESTINO PREVISTO</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (lote of lotes(); track lote.id) {
+                <tr>
+                    <td class="color-noche texto__black">
+                        <p>{{ lote.codigo }}</p>
+                        <p>{{ fecha(lote.fechaIngreso) }}</p>
+                    </td>
+                    <td class="table__data">
+                        <p class="table__data__cate color-gris-oscuro">{{ lote.categoriaPrincipal }}</p>
+                        <p class="table__data__cate color-gris-claro">{{ lote.descripcion }}</p>
+                    </td>
+                    <td>
+                        <div class="centrar">
+                            <p>{{ lote.volumen | number: '1.0-2' }}</p>
+                            <p>{{ lote.unidad }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <p><i class="bi bi-geo-alt-fill i-separador"></i>{{ lote.destino }}</p>
+                    </td>
+                    <td>
+                        <div [class]="'capsulas ' + estadoClase(lote.estado)">
+                            <i class="i-separador" [class]="'bi ' + estadoIcono(lote.estado)"></i>
+                            <p>{{ estadoTexto(lote.estado) }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" aria-label="Ver detalle" (click)="verDetalle(lote)">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                    </td>
+                </tr>
+            } @empty {
+                <tr>
+                    <td colspan="6" class="py-4 text-center color-gris-claro">
+                        No se encontraron lotes con ese criterio de búsqueda.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (error()) {
+        <div class="alert alert-danger py-2 px-3 small mt-3 mb-0" role="alert">
+            {{ error() }}
+        </div>
+    }
+
+    <div class="inferior">
+        <p>Mostrando <span class="inferior-span">{{ lotes().length }}</span> de
+            <span class="inferior-span">{{ lotesService.total() }}</span> lotes registrados
+        </p>
+        <div>
+            <button class="inferior-boton" type="button" [disabled]="lotesService.pagina() === 1"
+                (click)="lotesService.cambiarPagina(lotesService.pagina() - 1)">Anterior</button>
+            @for (pagina of lotesService.paginas(); track pagina) {
+                <button class="inferior-boton" type="button"
+                    [class.activa]="pagina === lotesService.pagina()"
+                    (click)="lotesService.cambiarPagina(pagina)">{{ pagina }}</button>
+            }
+            <button class="inferior-boton" type="button"
+                [disabled]="lotesService.pagina() === lotesService.totalPaginas()"
+                (click)="lotesService.cambiarPagina(lotesService.pagina() + 1)">Siguiente</button>
+            <button class="inferior-boton" type="button" (click)="exportar()">
+                <i class="bi bi-download"></i> Exportar
+            </button>
+        </div>
+    </div>
+</div>
+
+@if (seleccionado()) {
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="detalleLoteTitulo">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <h5 class="modal-title" id="detalleLoteTitulo">{{ seleccionado()?.codigo }}</h5>
+                        <small class="text-secondary">{{ fecha(seleccionado()!.fechaIngreso) }}</small>
+                    </div>
+                    <button type="button" class="btn-close" aria-label="Cerrar" (click)="cerrarDetalle()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-2 mb-3 small">
+                        <div class="col-md-6"><strong>Categoría:</strong> {{ seleccionado()?.categoriaPrincipal }}</div>
+                        <div class="col-md-6"><strong>Destino:</strong> {{ seleccionado()?.destino }}</div>
+                        <div class="col-md-6"><strong>Volumen:</strong> {{ seleccionado()?.volumen | number: '1.0-2' }} {{ seleccionado()?.unidad }}</div>
+                        <div class="col-md-6"><strong>Estado:</strong> {{ estadoTexto(seleccionado()!.estado) }}</div>
+                    </div>
+                    <h6 class="fw-bold">Artículos del lote</h6>
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Peso unitario</th>
+                                    <th>Vencimiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (articulo of seleccionado()!.articulos; track articulo.id) {
+                                    <tr>
+                                        <td>{{ articulo.descripcion }}</td>
+                                        <td>{{ articulo.cantidad }} {{ articulo.unidad }}</td>
+                                        <td>{{ articulo.pesoUnitarioKg ?? 0 }} kg</td>
+                                        <td>{{ fecha(articulo.fechaVencimiento) }}</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" (click)="cerrarDetalle()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}

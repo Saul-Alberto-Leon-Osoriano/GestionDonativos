@@ -1,0 +1,30 @@
+<div class="metas__contenedor">
+    <div class="metas__titulo">
+        <div class="metas__texto">
+            <h2>Metas de donación por rubros</h2>
+            <p>Avance consolidado respecto al objetivo establecido</p>
+        </div>
+        <p class="metas__cantidad">Meta general = {{ metaGeneral() }}Kg</p>
+    </div>
+    <div class="barras__contenedor">
+        @for (meta of metas(); track meta.id) {
+            <div class="barra">
+                <div class="barras__descripcion">
+                    <div class="barras__informacion">
+                        <div [class]="'barras__imagen ' + claseIcono(meta.color)">
+                            <i [class]="meta.icono"></i>
+                        </div>
+                        <p class="barras__titulo">{{ meta.categoria }}</p>
+                    </div>
+                    <div class="barras__avance">
+                        <p>{{ meta.recolectadoKg | number: '1.0-2' }}Kg<strong class="barras__avance--total">/{{ meta.metaKg }}Kg</strong></p>
+                        <p [class]="claseTexto(meta.color)">{{ porcentaje(meta) }}%</p>
+                    </div>
+                </div>
+                <div class="barra__contenido">
+                    <div [class]="'barra__relleno ' + meta.color" [style.width.%]="porcentaje(meta)"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

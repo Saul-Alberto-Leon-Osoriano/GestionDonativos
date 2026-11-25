@@ -1,0 +1,45 @@
+<div class="linea_tiempo__contenedor">
+    <div class="linea_tiempo">
+        <p class="linea_tiempo__etiqueta">Impacto directo</p>
+        <p class="linea_tiempo__titulo">Linea de Tiempo: Destino de las Donaciones</p>
+        <p class="linea_tiempo__descripcion">Historial de entregas efectivas realizadas por el equipo de pastoral del
+            colegio</p>
+    </div>
+    <div class="donativos__lista">
+        @for (hito of hitos(); track hito.id) {
+            <div class="donativos" [class.donativos_recepcionado]="esRecepcionado(hito)"
+                [class.donativos_preparacion]="!esRecepcionado(hito)">
+                <div class="donativos__estado"
+                    [class.estado--recepcionado]="esRecepcionado(hito)"
+                    [class.estado--preparacion]="!esRecepcionado(hito)">
+                    <i [class]="esRecepcionado(hito) ? 'bi bi-check-lg' : 'bi bi-hourglass-split'"></i>
+                </div>
+                <div class="donativos__informacion_envio">
+                    <p class="donativos__fecha"
+                        [class.fecha_recepcionado]="esRecepcionado(hito)"
+                        [class.fecha_preparacion]="!esRecepcionado(hito)">
+                        {{ fecha(hito.fecha) }}
+                    </p>
+                    <p class="donativos__lote">{{ hito.lote }}</p>
+                </div>
+                <div class="donativos__informacion_general">
+                    <p class="donativos__titulo">{{ hito.titulo }}</p>
+                    <p class="donativos__descripcion">{{ hito.descripcion }}</p>
+                </div>
+                <hr>
+                <div class="donativos__informacion_recepcion">
+                    <div class="donativos__logo">
+                        <i class="bi bi-shield-fill-check"></i>
+                        <p class="donativos__receptor">Recepcionado por <span class="donativos__receptor--nombre">{{ hito.receptor }}</span></p>
+                    </div>
+                    <div class="donativos__recepcion">
+                        <i class="bi bi-shield-fill-check"></i>
+                        <p class="donativos__acta">Acta de Recepción - {{ hito.acta }}</p>
+                    </div>
+                </div>
+            </div>
+        } @empty {
+            <p class="text-center text-secondary py-4">Todavía no hay entregas registradas.</p>
+        }
+    </div>
+</div>

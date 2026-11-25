@@ -1,0 +1,172 @@
+<div>
+    <main>
+        <div class="contenedor_general">
+            <div class="contenedor_izq_general">
+                <div>
+                    <div class="contenedor_izq_interior_capsula">
+                        <i class="bi bi-lock-fill"></i>
+                        <p>Plataforma Segura</p>
+                    </div>
+                    <h1 class="contenedor_izq_color_letra_tg">
+                        GESTIÓN SOCIAL &amp; SOLIDARIDAD
+                    </h1>
+                    <h4 class="contenedor_izq_color_letra_w contenedor_izq_color_letra_tm1">
+                        Acceso institucional para la administración de víveres, control de caducidad y trazabilidad de
+                        despachos a comedores y hogares beneficiarios.
+                    </h4>
+                    <div class="contenedor_izq_targeta">
+                        <div class="contenedor_izq_targeta_i1">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="contenedor_izq_targeta_t">
+                            <h3 class="contenedor_izq_targeta_e1 contenedor_izq_color_letra_tm2">ÁREA PASTORAL</h3>
+                            <p class="contenedor_izq_color_letra_w contenedor_izq_color_letra_tp">Recepción,
+                                clasificación y auditoria de donativos.</p>
+                        </div>
+                    </div>
+                    <div class="contenedor_izq_targeta">
+                        <div class="contenedor_izq_targeta_i2">
+                            <i class="bi bi-person-heart"></i>
+                        </div>
+                        <div class="contenedor_izq_targeta_t">
+                            <h3 class="contenedor_izq_targeta_e2 contenedor_izq_color_letra_tm2">COMITÉ SOLIDARIO</h3>
+                            <p class="contenedor_izq_color_letra_w contenedor_izq_color_letra_tp">Embalaje, verificación
+                                sanitaria y logística de entrega.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contenedor_der">
+                <h3 class="contenedor_der_color_ambar contenedor_der_tamaño_mediop">BIENVENIDO AL SISTEMA</h3>
+                <h2 class="contenedor_der_tamaño_mediog">Iniciar Sesión</h2>
+                <p class="contenedor_der_color_gris">Ingresa con tus credenciales asignadas por la Coordinación Pastoral
+                </p>
+
+                <div class="contenedor_der_capsula">
+                    <button type="button" class="contenedor_der_capsula_1 tipo-acceso"
+                        [class.tipo-activo]="tipoAcceso() === 'administrativo'"
+                        (click)="seleccionarTipo('administrativo')">
+                        <i class="bi bi-shield-shaded contenedor_der_color_ambar"></i>
+                        <h5 class="contenedor_der_color_gris">Equipo Pastoral</h5>
+                    </button>
+                    <button type="button" class="contenedor_der_capsula_2 tipo-acceso"
+                        [class.tipo-activo]="tipoAcceso() === 'donante'"
+                        (click)="seleccionarTipo('donante')">
+                        <i class="bi bi-heart-fill contenedor_der_color_ambar"></i>
+                        <h5 class="contenedor_der_color_gris">Donante</h5>
+                    </button>
+                </div>
+
+                <form (submit)="ingresar($event)" novalidate>
+                    <div>
+                        <label class="contenedor_der_tamaño_mediop" for="correo">CORREO ELECTRÓNICO</label>
+                        <div class="contenedor_der_entradas" [class.contenedor_der_entradas_error]="formulario.correo().touched() && formulario.correo().invalid()">
+                            <i class="bi bi-envelope"></i>
+                            <input id="correo" type="email" autocomplete="email"
+                                placeholder="ejemplo@correo.com" [formField]="formulario.correo"
+                                [class.is-invalid]="formulario.correo().touched() && formulario.correo().invalid()"
+                                (input)="errorLogin.set(null)" />
+                        </div>
+                        <app-form-error [campo]="formulario.correo()" />
+                    </div>
+
+                    <div>
+                        <div class="contenedor_der_entradas_olvicontr">
+                            <label class="contenedor_der_tamaño_mediop" for="password">CONTRASEÑA</label>
+                            <button type="button" class="login-link"
+                                (click)="abrirRecuperacion()">¿Olvidaste tu contraseña?</button>
+                        </div>
+
+                        <div class="contenedor_der_entradas" [class.contenedor_der_entradas_error]="formulario.password().touched() && formulario.password().invalid()">
+                            <i class="bi bi-key-fill"></i>
+                            <input id="password" type="password" autocomplete="current-password"
+                                placeholder="···············" [formField]="formulario.password"
+                                [class.is-invalid]="formulario.password().touched() && formulario.password().invalid()"
+                                (input)="errorLogin.set(null)" />
+                        </div>
+                        <app-form-error [campo]="formulario.password()" />
+
+                        <div class="contenedor_der_recordar">
+                            <input id="recordar" class="contenedor_der_entradas_checkbox"
+                                type="checkbox" [formField]="formulario.recordar" />
+                            <label class="contenedor_der_tamaño_pequeñom contenedor_der_color_gris" for="recordar">
+                                Recordar sesión en este equipo
+                            </label>
+                        </div>
+
+                        @if (errorLogin()) {
+                            <div class="alert alert-danger py-2 login-alerta" role="alert">
+                                {{ errorLogin() }}
+                            </div>
+                        }
+
+                        <button class="contenedor_der_boton" type="submit">
+                            <p>Ingresar al Sistema</p>
+                            <i class="bi bi-arrow-right contenedor_der_color_ambar"></i>
+                        </button>
+
+                        <p class="login-demo">
+                            Demo administrativo: <strong>pastoral@sanpiox.edu.pe</strong> / <strong>admin123</strong><br />
+                            Demo donante: <strong>donante@sanpiox.edu.pe</strong> / <strong>donante123</strong>
+                        </p>
+                    </div>
+                </form>
+
+                <hr>
+                <div class="contenedor_der_enlaceportal">
+                    <p class="contenedor_der_tamaño_pequeñom contenedor_der_color_gris">
+                        ¿Deseas verificar el impacto público de las donaciones?
+                    </p>
+                    <a class="contenedor_der_enlaceporta_boton" routerLink="/transparencia">
+                        <i class="bi bi-pie-chart-fill contenedor_der_color_ambar"></i>
+                        <p class="contenedor_der_tamaño_pequeñom">Ir al Portal Transparencia de Donantes</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    @if (mostrarRecuperacion()) {
+        <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true"
+            aria-labelledby="tituloRecuperacion">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tituloRecuperacion">Recuperar acceso</h5>
+                        <button type="button" class="btn-close" aria-label="Cerrar"
+                            (click)="cerrarRecuperacion()"></button>
+                    </div>
+                    <form (submit)="solicitarRecuperacion($event)" novalidate>
+                        <div class="modal-body">
+                            @if (!recuperacionEnviada()) {
+                                <p class="text-secondary small">
+                                    El sistema notificará al administrador de la pastoral para que restablezca tu
+                                    acceso. No se envían contraseñas automáticamente.
+                                </p>
+                                <label class="form-label fw-semibold" for="correoRecuperacion">Correo registrado</label>
+                                <input id="correoRecuperacion" type="email"
+                                    class="form-control" [class.is-invalid]="recuperacionFormulario.correo().touched() && recuperacionFormulario.correo().invalid()"
+                                    [formField]="recuperacionFormulario.correo" />
+                                <app-form-error [campo]="recuperacionFormulario.correo()" />
+                            } @else {
+                                <div class="alert alert-success mb-0" role="status">
+                                    <i class="bi bi-check-circle-fill me-2"></i>
+                                    Solicitud enviada. El administrador revisará tu caso y se pondrá en contacto contigo.
+                                </div>
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            @if (!recuperacionEnviada()) {
+                                <button type="submit" class="btn btn-primary">Notificar al administrador</button>
+                            }
+                            <button type="button" class="btn btn-outline-secondary"
+                                (click)="cerrarRecuperacion()">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade show"></div>
+    }
+</div>

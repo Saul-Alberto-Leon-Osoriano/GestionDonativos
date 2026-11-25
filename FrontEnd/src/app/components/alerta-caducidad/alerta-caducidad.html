@@ -1,0 +1,79 @@
+<div class="contenedor">
+    <div class="texto__superior">
+        <div class="centrar_elementos">
+            <i class="bi bi-bell-fill icono_superior"></i>
+            <div>
+                <h3>Alertas de Caducidad</h3>
+                <p class="color-rojo">Prótocolo de Salida Preventiva</p>
+            </div>
+        </div>
+        <div class="capsula-1">
+            <span>{{ total().length }}</span>
+            <p>Críticos</p>
+        </div>
+    </div>
+    <hr>
+    <div class="texto-info-general">
+        <p class="texto-info">
+            Los siguientes artículos donados están dentro de la ventana de
+            <span class="texto-info-rojo">15 días</span>
+            previa al vencimiento. Se sugiere priorizar en la próxima entrega.
+        </p>
+    </div>
+
+    @for (alerta of alertas(); track alerta.articuloId) {
+        <div class="tarjetas">
+            <div class="tarjeta-centrador tarjeta-columna">
+                <div class="tarjeta-centrador-2">
+                    <div class="tarjeta-centrador-1">
+                        <i class="bi bi-circle-fill color-rojo tamaño-smaller"></i>
+                        <p class="font-gruesa">{{ alerta.nombre }}</p>
+                    </div>
+                    <div class="capsula-2">
+                        @if (alerta.diasRestantes < 0) {
+                            <p>Vencido hace</p>
+                            <span>{{ -alerta.diasRestantes }}</span>
+                            <p>días</p>
+                        } @else {
+                            <p>Vence en</p>
+                            <span>{{ alerta.diasRestantes }}</span>
+                            <p>días</p>
+                        }
+                    </div>
+                </div>
+                <div class="tarjeta-centrador-1 color-gris-1">
+                    <p>Lote:</p>
+                    <p>{{ alerta.lote }}</p>
+                </div>
+            </div>
+            <div>
+                <hr class="color-rojo-hr">
+                <div class="tarjeta-centrador-3">
+                    <div class="tarjeta-centrador-1 color-gris-2">
+                        <i class="bi bi-clock"></i>
+                        <p>{{ fecha(alerta.fechaVencimiento) }}</p>
+                    </div>
+                    <button type="button" class="tarjeta-centrador-1 color-rojo font-gruesa border-0 bg-transparent p-0"
+                        [disabled]="accionEnCurso()" (click)="priorizar(alerta)">
+                        <p>Priorizar lote</p>
+                        <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    } @empty {
+        <div class="alert alert-success mt-3" role="status">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            No hay artículos cercanos al vencimiento.
+        </div>
+    }
+
+    @if (mensaje()) {
+        <div class="alert alert-info py-2 px-3 small" role="status">{{ mensaje() }}</div>
+    }
+
+    <button type="button" class="boton font-gruesa border-0 w-100" [disabled]="accionEnCurso()" (click)="generarDespachoUrgente()">
+        <i class="bi bi-truck"></i>
+        <p class="mb-0">{{ accionEnCurso() ? 'Procesando...' : 'Generar Despacho Urgente para Comedores' }}</p>
+    </button>
+</div>

@@ -1,0 +1,39 @@
+<div class="header__bg">
+    <header class="header">
+        <div class="header__titulo">
+            <div class="header__logo">
+                <a routerLink="/inicio">
+                    <img src="images/Logo-SanPioX.png" alt="logo_san_pio_x" />
+                </a>
+            </div>
+            <div class="header__texto__contenedor">
+                <div class="header__titulo__texto">
+                    <h2 class="header__titulo__contenido">San Pio X</h2>
+                    <p class="header__etiqueta">Pastoral</p>
+                </div>
+                <p class="header__descripcion">Gestor solidario de Donativos y Alimentos</p>
+            </div>
+        </div>
+
+        <div class="header__enlaces">
+            @if (auth.estaAutenticado()) {
+                <span class="header__usuario">Hola, {{ auth.sesion()?.nombre }}</span>
+                <a routerLink="/panel-control">Panel</a>
+                @if (auth.esAdministrativo()) {
+                    <a routerLink="/gestor-usuarios">Usuarios</a>
+                }
+                <a routerLink="/registrar_encomienda">Registrar</a>
+            } @else {
+                <a routerLink="/inicio">Iniciar Sesión</a>
+            }
+
+            <a routerLink="/transparencia">Transparencia</a>
+
+            @if (auth.estaAutenticado()) {
+                <button type="button" class="header__logout" (click)="cerrarSesion()">Salir</button>
+            }
+
+            <p>· Huancayo, Perú</p>
+        </div>
+    </header>
+</div>

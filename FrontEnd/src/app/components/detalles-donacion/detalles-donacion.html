@@ -1,0 +1,148 @@
+<div class="card border border-light-subtle rounded-4 shadow-sm p-4 p-md-5 bg-white">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 pb-4 mb-4 border-bottom">
+    <div class="d-flex align-items-center gap-3">
+      <div class="paso-numero rounded-3 d-flex align-items-center justify-content-center fw-bold">
+        2
+      </div>
+      <div>
+        <h4 class="mb-1 fw-bold texto-azul-oscuro">Detalle y Clasificación de Víveres</h4>
+        <p class="mb-0 text-secondary small">Agrega uno o más productos a este ingreso con sus fechas de vencimiento</p>
+      </div>
+    </div>
+
+    <button type="button"
+      class="btn btn-agregar-articulo rounded-3 px-3 py-2 fw-semibold d-flex align-items-center gap-2"
+      (click)="draft.agregarArticulo()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Agregar Otro Artículo</span>
+    </button>
+  </div>
+
+  <datalist id="categoriasAlimento">
+    @for (categoria of categorias; track categoria) {
+      <option [value]="categoria"></option>
+    }
+  </datalist>
+
+  @for (articulo of draft.modelo().articulos; track articulo.id; let i = $index) {
+    @let campo = campos()[i];
+
+    <div class="card-articulo rounded-4 p-3 p-md-4 mb-3" [class.alerta-preventiva]="esPorVencer(articulo)">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <div class="d-flex align-items-center gap-2 fw-bold texto-azul-oscuro">
+          <i class="bi bi-box-seam-fill text-warning"></i>
+          <span>Artículo #{{ i + 1 }}</span>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          @if (esPorVencer(articulo)) {
+            <span class="badge badge-alerta rounded-2 px-3 py-2 fw-semibold">
+              Vence en menos de 30 días
+            </span>
+          } @else {
+            <span class="badge badge-estado-optimo rounded-2 px-3 py-2 fw-semibold d-flex align-items-center gap-1">
+              <i class="bi bi-check-lg"></i> Estado Óptimo
+            </span>
+          }
+
+          <button type="button"
+            class="btn btn-link text-danger text-decoration-none p-0 small fw-semibold d-flex align-items-center gap-1"
+            [disabled]="draft.modelo().articulos.length <= 1" (click)="quitar(articulo.id)">
+            <i class="bi bi-trash3"></i> Quitar
+          </button>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary" [for]="'categoria-' + i">
+            Categoría del Alimento
+          </label>
+          <input [id]="'categoria-' + i" type="text"
+            class="form-control input-articulo rounded-3 py-2" list="categoriasAlimento"
+            placeholder="Ej. Lácteos y Harinas"
+            [class.is-invalid]="campo.categoria().touched() && campo.categoria().invalid()"
+            [formField]="campo.categoria" />
+          <app-form-error [campo]="campo.categoria()" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary" [for]="'descripcion-' + i">
+            Descripción del Producto
+          </label>
+          <input [id]="'descripcion-' + i" type="text"
+            class="form-control input-articulo rounded-3 py-2"
+            placeholder="Ej. Leche evaporada entera (lata 400 g)"
+            [class.is-invalid]="campo.descripcion().touched() && campo.descripcion().invalid()"
+            [formField]="campo.descripcion" />
+          <app-form-error [campo]="campo.descripcion()" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary" [for]="'cantidad-' + i">
+            Cantidad
+          </label>
+          <input [id]="'cantidad-' + i" type="number"
+            class="form-control input-articulo rounded-3 py-2"
+            [class.is-invalid]="campo.cantidad().touched() && campo.cantidad().invalid()"
+            [formField]="campo.cantidad" />
+          <app-form-error [campo]="campo.cantidad()" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary">
+            Unidad de Medida
+          </label>
+          <div class="d-flex gap-2 flex-wrap">
+            @for (unidad of unidades; track unidad; let u = $index) {
+              <div>
+                <input type="radio" class="btn-check"
+                  [id]="'unidad-' + i + '-' + u" [value]="unidad" [formField]="campo.unidad" />
+                <label class="btn btn-sm btn-outline-secondary rounded-3" [for]="'unidad-' + i + '-' + u">
+                  {{ unidad }}
+                </label>
+              </div>
+            }
+          </div>
+          <app-form-error [campo]="campo.unidad()" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary" [for]="'peso-' + i">
+            Peso por unidad (kg) <span class="text-danger">*</span>
+          </label>
+          <div class="input-group grupo-medida">
+            <input [id]="'peso-' + i" type="number" step="0.01"
+              class="form-control py-2 px-3"
+              [class.is-invalid]="campo.pesoUnitarioKg().touched() && campo.pesoUnitarioKg().invalid()"
+              [formField]="campo.pesoUnitarioKg" />
+            <span class="input-group-text small fw-semibold px-3">kg</span>
+          </div>
+          <app-form-error [campo]="campo.pesoUnitarioKg()" />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <label class="form-label small fw-semibold text-secondary" [for]="'vencimiento-' + i">
+            Fecha de Vencimiento <span class="text-danger">*</span>
+          </label>
+          <input [id]="'vencimiento-' + i" type="date"
+            class="form-control input-articulo rounded-3 py-2"
+            [class.is-invalid]="campo.fechaVencimiento().touched() && campo.fechaVencimiento().invalid()"
+            [formField]="campo.fechaVencimiento" />
+          <app-form-error [campo]="campo.fechaVencimiento()" />
+        </div>
+      </div>
+    </div>
+  }
+
+  <div>
+    <label class="form-label fw-semibold small texto-azul-oscuro mb-2" for="observaciones">
+      Observaciones de Recepción / Estado del Empaque
+    </label>
+    <textarea id="observaciones" class="form-control input-articulo rounded-3 p-3" rows="2"
+      placeholder="Empaques sellados y en excelente estado de conservación higiénica..."
+      [class.is-invalid]="draft.form.observaciones().touched() && draft.form.observaciones().invalid()"
+      [formField]="draft.form.observaciones"></textarea>
+    <app-form-error [campo]="draft.form.observaciones()" />
+  </div>
+</div>
