@@ -153,6 +153,15 @@ export class LoteService {
     await this.recargar();
   }
 
+  async actualizarEstadoLote(
+    loteId: string,
+    estado: EstadoLote,
+  ): Promise<Lote> {
+    const actualizado = await this.cambiarEstado(loteId, estado);
+    await this.recargar();
+    return actualizado;
+  }
+
   async generarDespachoUrgente(): Promise<number> {
     if (!this.esNavegador) {
       return 0;
