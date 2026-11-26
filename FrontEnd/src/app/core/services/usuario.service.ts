@@ -98,8 +98,10 @@ export class UsuarioService {
     id: string,
     datos: UsuarioForm,
   ): Promise<Usuario | undefined> {
+    const { password, ...resto } = datos;
+    const payload = password.trim() ? { ...resto, password } : resto;
     const actualizado = await firstValueFrom(
-      this.http.put<Usuario>(`${this.apiURL}/api/usuarios/${id}`, datos),
+      this.http.put<Usuario>(`${this.apiURL}/api/usuarios/${id}`, payload),
     );
 
     this.usuariosState.update((usuarios) =>

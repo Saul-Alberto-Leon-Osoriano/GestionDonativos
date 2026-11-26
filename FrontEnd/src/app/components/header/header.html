@@ -18,11 +18,11 @@
         <div class="header__enlaces">
             @if (auth.estaAutenticado()) {
                 <span class="header__usuario">Hola, {{ auth.sesion()?.nombre }}</span>
-                <a routerLink="/panel-control">Panel</a>
                 @if (auth.esAdministrativo()) {
+                    <a routerLink="/panel-control">Panel</a>
                     <a routerLink="/gestor-usuarios">Usuarios</a>
+                    <a routerLink="/registrar_encomienda">Registrar</a>
                 }
-                <a routerLink="/registrar_encomienda">Registrar</a>
             } @else {
                 <a routerLink="/inicio">Iniciar Sesión</a>
             }

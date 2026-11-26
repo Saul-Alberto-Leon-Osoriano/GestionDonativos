@@ -13,6 +13,7 @@ export interface UsuarioForm {
   nombre: string;
   telefono: string;
   correo: string;
+  password: string;
   rol: RolUsuario;
   activo: boolean;
 }
@@ -31,6 +32,7 @@ export function crearUsuarioVacio(): UsuarioForm {
     nombre: '',
     telefono: '',
     correo: '',
+    password: '',
     rol: 'donante',
     activo: true,
   };

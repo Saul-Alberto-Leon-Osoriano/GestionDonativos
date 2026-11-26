@@ -191,6 +191,21 @@
                             <app-form-error [campo]="formulario.correo()" />
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-semibold small" for="passwordUsuario">
+                                {{ editandoId() ? 'Nueva contraseña (opcional)' : 'Contraseña temporal *' }}
+                            </label>
+                            <input id="passwordUsuario" type="password" class="form-control"
+                                autocomplete="new-password"
+                                [class.is-invalid]="formulario.password().touched() && formulario.password().invalid()"
+                                [formField]="formulario.password" />
+                            <div class="form-text">
+                                {{ editandoId()
+                                    ? 'Déjala vacía para conservar la contraseña actual.'
+                                    : 'Mínimo 8 caracteres.' }}
+                            </div>
+                            <app-form-error [campo]="formulario.password()" />
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label fw-semibold small" for="rolUsuario">Tipo de usuario *</label>
                             <select id="rolUsuario" class="form-select"
                                 [class.is-invalid]="formulario.rol().touched() && formulario.rol().invalid()"

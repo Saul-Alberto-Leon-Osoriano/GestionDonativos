@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException, Query, Response
+from fastapi import APIRouter, Depends, HTTPException, Query, Response
 
+from backend.dependencies import require_admin
 from backend.schemas import (
     AlertaVencimiento,
     EstadoLote,
@@ -8,10 +9,15 @@ from backend.schemas import (
     LoteCrear,
     LoteEstadoActualizar,
     RespuestaPaginada,
+    Usuario,
 )
 from backend.services import servicio_lotes
 
-router = APIRouter(prefix="/api/lotes", tags=["lotes"])
+router = APIRouter(
+    prefix="/api/lotes",
+    tags=["lotes"],
+    dependencies=[Depends(require_admin)],
+)
 
 
 @router.get("", response_model=RespuestaPaginada[Lote])
@@ -92,9 +98,12 @@ def obtener_lote(id_lote: str) -> Lote:
 
 
 @router.post("", response_model=Lote, status_code=201)
-def crear_lote(datos: LoteCrear) -> Lote:
+def crear_lote(
+    datos: LoteCrear,
+    admin: Usuario = Depends(require_admin),
+) -> Lote:
     try:
-        return servicio_lotes.crear(datos)
+        return servicio_lotes.crear(datos, admin.id_usuario or 0)
     except HTTPException:
         raise
     except Exception as exc:
@@ -104,12 +113,15 @@ def crear_lote(datos: LoteCrear) -> Lote:
 
 
 @router.put("/{id_lote}/estado", response_model=Lote)
-def cambiar_estado_lote(id_lote: str, datos: LoteEstadoActualizar) -> Lote:
+def cambiar_estado_lote(
+    id_lote: str, datos: LoteEstadoActualizar
+) -> Lote:
     try:
         return servicio_lotes.cambiar_estado(id_lote, datos.estado)
     except HTTPException:
         raise
     except Exception as exc:
         raise HTTPException(
-            status_code=500, detail="Error inesperado al cambiar el estado del lote."
+            status_code=500,
+            detail="Error inesperado al cambiar el estado del lote.",
         ) from exc

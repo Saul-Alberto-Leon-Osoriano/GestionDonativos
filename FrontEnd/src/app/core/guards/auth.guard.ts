@@ -19,5 +19,5 @@ export const adminGuard: CanActivateFn = () => {
 
   return auth.esAdministrativo()
     ? true
-    : router.createUrlTree(['/panel-control']);
+    : router.createUrlTree(['/transparencia']);
 };

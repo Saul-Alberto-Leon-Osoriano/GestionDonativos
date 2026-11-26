@@ -29,6 +29,11 @@ class EstadoHito(str, Enum):
     PREPARACION = "preparacion"
 
 
+class EstadoEntrega(str, Enum):
+    ENTREGADO = "Entregado"
+    PENDIENTE = "Pendiente"
+
+
 CATEGORIAS_ALIMENTO: tuple[str, ...] = (
     "Arroz, Avena y Menestras",
     "Conservas de Pescado & Aceites",
