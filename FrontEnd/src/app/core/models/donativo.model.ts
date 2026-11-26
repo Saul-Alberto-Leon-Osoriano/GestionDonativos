@@ -44,7 +44,7 @@ export const TIPOS_DONANTE: readonly {
   { valor: 'anonimo', etiqueta: 'Anónimo', icono: 'bi-incognito' },
 ];
 
-export const UNIDADES_MEDIDA: readonly UnidadMedida[] = ['Unid.', 'Kg', 'Paq.'];
+export const UNIDADES_MEDIDA: readonly UnidadMedida[] = ['Unid.', 'Paq.'];
 
 export const CATEGORIAS_ALIMENTO: readonly string[] = [
   'Arroz, Avena y Menestras',

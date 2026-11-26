@@ -1,0 +1,28 @@
+# Dependencias y caché de Node / Angular
+node_modules/
+.angular/
+dist/
+coverage/
+
+# Entornos y caché de Python (si el BackEnd usa Python)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Archivos de entorno y sistema
+.env
+.env.*
+.DS_Store
+Thumbs.db
+
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+__pycache__/
