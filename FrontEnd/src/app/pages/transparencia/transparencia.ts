@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Header } from '../../components/header/header';
 import { Footer } from '../../components/footer/footer';
 import { Resumen } from '../../components/resumen/resumen';
 import { MetasDonacion } from '../../components/metas-donacion/metas-donacion';
 import { LineaTiempo } from '../../components/linea-tiempo/linea-tiempo';
 import { ContactarPastoral } from '../../components/contactar-pastoral/contactar-pastoral';
+import { TransparenciaService } from '../../core/services/transparencia.service';
 
 @Component({
   imports: [Header, Footer, Resumen, MetasDonacion, LineaTiempo, ContactarPastoral, ],
@@ -12,4 +13,11 @@ import { ContactarPastoral } from '../../components/contactar-pastoral/contactar
   styleUrl: './transparencia.css',
   templateUrl: './transparencia.html',
 })
-export class Transparencia {}
+export class Transparencia implements OnInit {
+  private readonly transparencia = inject(TransparenciaService);
+
+  ngOnInit(): void {
+    // Evita mostrar hitos en cache al volver desde el panel de control.
+    void this.transparencia.recargar();
+  }
+}

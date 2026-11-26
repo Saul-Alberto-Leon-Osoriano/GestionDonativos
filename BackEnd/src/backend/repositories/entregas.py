@@ -43,6 +43,73 @@ def _a_entrega(fila: dict) -> Entrega:
 class RepositorioEntregas:
     """Lectura de hitos y registro de actas."""
 
+    def obtener_por_donacion(self, id_donacion: int) -> Entrega | None:
+        """Devuelve el acta mas reciente del lote, si ya fue publicada."""
+
+        with conexion() as conn:
+            cur = conn.cursor(dictionary=True)
+            try:
+                cur.execute(
+                    _SELECT_ENTREGA
+                    + " WHERE e.id_donacion = %s "
+                    "ORDER BY e.id_entrega DESC LIMIT 1",
+                    (id_donacion,),
+                )
+                fila = cur.fetchone()
+            finally:
+                cur.close()
+
+        return _a_entrega(fila) if fila else None
+
+    def siguiente_codigo_acta(self) -> str:
+        """Genera un codigo de acta consecutivo con el formato #ACTA-XXXX."""
+
+        with conexion() as conn:
+            cur = conn.cursor(dictionary=True)
+            try:
+                cur.execute(
+                    "SELECT COALESCE(MAX(CAST(SUBSTRING_INDEX(codigo_acta, "
+                    "'-', -1) AS UNSIGNED)), 0) AS maximo "
+                    "FROM entregas_transparencia "
+                    "WHERE codigo_acta LIKE %s",
+                    ("#ACTA-%",),
+                )
+                fila = cur.fetchone()
+            finally:
+                cur.close()
+
+        maximo = int(fila["maximo"]) if fila else 0
+        return f"#ACTA-{maximo + 1:04d}"
+
+    def marcar_entregada_por_donacion(self, id_donacion: int) -> None:
+        """Publica como entregada un acta previa del lote (evita duplicados)."""
+
+        with conexion() as conn:
+            cur = conn.cursor()
+            try:
+                cur.execute(
+                    "UPDATE entregas_transparencia SET estado_entrega = %s "
+                    "WHERE id_donacion = %s",
+                    (EstadoEntrega.ENTREGADO.value, id_donacion),
+                )
+            finally:
+                cur.close()
+
+    def eliminar_por_donacion(self, id_donacion: int) -> int:
+        """Retira las actas del lote cuando deja de estar entregado."""
+
+        with conexion() as conn:
+            cur = conn.cursor()
+            try:
+                cur.execute(
+                    "DELETE FROM entregas_transparencia "
+                    "WHERE id_donacion = %s",
+                    (id_donacion,),
+                )
+                return int(cur.rowcount)
+            finally:
+                cur.close()
+
     def listar_hitos(self) -> list[HitoDonacion]:
         with conexion() as conn:
             cur = conn.cursor(dictionary=True)

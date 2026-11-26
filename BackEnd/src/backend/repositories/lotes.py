@@ -243,6 +243,25 @@ class RepositorioLotes:
             articulos = self._cargar_articulos(conn, [int(fila["id_donacion"])])
             return _a_lote(fila, articulos.get(int(fila["id_donacion"]), []))
 
+    def obtener_agente_pastoral(self, id_: str) -> int | None:
+        """Identificador del agente que registro el lote."""
+
+        condicion, valor = _condicion_id(id_)
+        condicion = condicion.replace("d.", "")
+        with conexion() as conn:
+            cur = conn.cursor(dictionary=True)
+            try:
+                cur.execute(
+                    "SELECT id_agente_pastoral FROM donaciones "
+                    f"WHERE {condicion} LIMIT 1",
+                    (valor,),
+                )
+                fila = cur.fetchone()
+            finally:
+                cur.close()
+
+        return int(fila["id_agente_pastoral"]) if fila else None
+
     def _siguiente_codigo_lote(self, cur, fecha: datetime) -> str:
         prefijo = f"#PX-LOT-{fecha.year}-"
         cur.execute(

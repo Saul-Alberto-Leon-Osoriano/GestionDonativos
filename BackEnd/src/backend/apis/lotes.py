@@ -114,10 +114,12 @@ def crear_lote(
 
 @router.put("/{id_lote}/estado", response_model=Lote)
 def cambiar_estado_lote(
-    id_lote: str, datos: LoteEstadoActualizar
+    id_lote: str,
+    datos: LoteEstadoActualizar,
+    admin: Usuario = Depends(require_admin),
 ) -> Lote:
     try:
-        return servicio_lotes.cambiar_estado(id_lote, datos.estado)
+        return servicio_lotes.cambiar_estado(id_lote, datos.estado, admin)
     except HTTPException:
         raise
     except Exception as exc:
