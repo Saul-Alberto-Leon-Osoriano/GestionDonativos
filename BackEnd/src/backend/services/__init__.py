@@ -12,7 +12,7 @@ from .lotes import ServicioLotes
 from .transparencia import ServicioTransparencia
 from .usuarios import ServicioUsuarios
 
-servicio_lotes = ServicioLotes(repositorio_lotes)
+servicio_lotes = ServicioLotes(repositorio_lotes, repositorio_entregas)
 servicio_donativos = ServicioDonativos(servicio_lotes)
 servicio_usuarios = ServicioUsuarios(repositorio_usuarios)
 servicio_auth = ServicioAuth(repositorio_usuarios)
