@@ -27,13 +27,12 @@
                 <a routerLink="/inicio">Iniciar Sesión</a>
             }
 
-            <a routerLink="/transparencia">Transparencia</a>
 
             @if (auth.estaAutenticado()) {
-                <button type="button" class="header__logout" (click)="cerrarSesion()">Salir</button>
+                <a class="header__logout" (click)="cerrarSesion()">Salir</a>
             }
 
-            <p>· Huancayo, Perú</p>
+            <p>Huancayo, Perú</p>
         </div>
     </header>
 </div>
