@@ -110,7 +110,22 @@
                         <div class="col-md-6"><strong>Categoría:</strong> {{ seleccionado()?.categoriaPrincipal }}</div>
                         <div class="col-md-6"><strong>Destino:</strong> {{ seleccionado()?.destino }}</div>
                         <div class="col-md-6"><strong>Volumen:</strong> {{ seleccionado()?.volumen | number: '1.0-2' }} {{ seleccionado()?.unidad }}</div>
-                        <div class="col-md-6"><strong>Estado:</strong> {{ estadoTexto(seleccionado()!.estado) }}</div>
+                        <div class="col-md-6 d-flex align-items-center gap-2">
+                            <strong>Estado:</strong>
+                            <select class="form-select form-select-sm w-auto"
+                                [value]="seleccionado()?.estado"
+                                (change)="cambiarEstadoSeleccionado($event)"
+                                [disabled]="guardandoEstado()">
+                                @for (opcion of opcionesEstado; track opcion.valor) {
+                                    <option [value]="opcion.valor" [selected]="opcion.valor === seleccionado()?.estado">
+                                        {{ opcion.etiqueta }}
+                                    </option>
+                                }
+                            </select>
+                            @if (guardandoEstado()) {
+                                <span class="text-secondary">Guardando...</span>
+                            }
+                        </div>
                     </div>
                     <h6 class="fw-bold">Artículos del lote</h6>
                     <div class="table-responsive">

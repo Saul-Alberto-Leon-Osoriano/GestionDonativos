@@ -75,4 +75,36 @@ export class GestionLotes {
       this.error.set(mensajeErrorApi(error));
     }
   }
+
+  readonly guardandoEstado = signal(false);
+  readonly opcionesEstado: { valor: EstadoLote; etiqueta: string }[] = [
+    { valor: 'pendiente', etiqueta: 'Pendiente' },
+    { valor: 'preparacion', etiqueta: 'En preparación' },
+    { valor: 'entregado', etiqueta: 'Entregado' },
+  ];
+
+  async cambiarEstadoSeleccionado(evento: Event): Promise<void> {
+    const lote = this.seleccionado();
+    const nuevoEstado = (evento.target as HTMLSelectElement).value as EstadoLote;
+
+    if (!lote || !nuevoEstado || lote.estado === nuevoEstado) {
+      return;
+    }
+
+    this.guardandoEstado.set(true);
+    this.error.set(null);
+
+    try {
+      const actualizado = await this.lotesService.actualizarEstadoLote(
+        lote.id,
+        nuevoEstado,
+      );
+      this.seleccionado.set(actualizado);
+    } catch (error) {
+      this.error.set(mensajeErrorApi(error));
+    } finally {
+      this.guardandoEstado.set(false);
+    }
+  }
+
 }
